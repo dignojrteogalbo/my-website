@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Container, useColorModeValue } from '@chakra-ui/react';
+import React, { FunctionComponent } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from 'react-router-dom';
 import './App.css';
+import { Navbar } from './components';
+import { Home, Projects, Contact, PageNotFound } from './pages';
 
-function App() {
+type AppProps = {
+}
+
+const App: FunctionComponent<AppProps> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container 
+      maxW='100%' 
+      p={0}
+      bg={useColorModeValue('white', 'gray.800')}
+    >
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/projects' element={<Projects />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </Router>
+    </Container>
   );
 }
 
